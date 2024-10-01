@@ -1,1 +1,56 @@
-
+pipeline {
+    agent any
+    
+    environment {
+        num1= 100
+        num2=5
+        ruta="C:\\Users\\iker.montero\\Documents\\resultados_FechaDeHoy.txt"
+    }
+    
+    stages {
+        stage("Suma") {
+            steps {
+                script {
+                    suma = num1.toInteger() + num2.toInteger()
+                    writeFile(file: ruta, text: "Resultado suma: ${suma}, ")
+                }
+            }
+        }
+        
+        stage("Resta") {
+            steps {
+                script {
+                    script {
+                        resta = num1.toInteger() - num2.toInteger()
+                        resultado_txt = readFile(file: ruta) + "Resultado resta: ${resta}, "
+                        writeFile(file: ruta, text: resultado_txt)
+                    }       
+                }
+            }
+        }
+        
+        stage("Division") {
+            steps {
+                script {
+                    if (num2 == 0) {
+                        println "El num2 es 0"
+                    } else {
+                        division = num1.toInteger() / num2.toInteger()
+                        resultado_txt = readFile(file: ruta) + "Resultado division: ${division}, "
+                        writeFile(file: ruta, text: resultado_txt)
+                    }
+                }
+            }
+        }
+        
+        stage("Multiplicación") {
+            steps {
+                script {
+                    multiplicacion = num1.toInteger() * num2.toInteger()
+                    resultado_txt = readFile(file: ruta) + "Resultado multiplicacion: ${multiplicacion} "
+                    writeFile(file: ruta, text: resultado_txt)
+                }
+            }
+        }
+    }
+}
