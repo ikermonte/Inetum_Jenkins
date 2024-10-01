@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+     environment {
+         MI_NOMBRE = "Iker"
+         MI_APELLIDO = "Montero"
+     }
+     
+     stages {
+         stage("Ejemplo variables entorno" {
+             steps {
+                 script {
+                     println MI_NOMBRE
+                     println MI_APELLIDO
+                 }
+             }
+         }
+     }
+}
